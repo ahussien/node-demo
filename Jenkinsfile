@@ -20,7 +20,7 @@ pipeline {
         }
          stage('deploy') {
             steps {
-                sh 'deploy docker image'
+                echo 'deploy docker image'
             }
         }
     }
