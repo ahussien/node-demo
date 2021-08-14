@@ -13,5 +13,15 @@ pipeline {
                 sh 'npm test'
             }
         }
+         stage('build docker image') {
+            steps {
+                echo ' build docker image'
+            }
+        }
+         stage('deploy') {
+            steps {
+                sh 'deploy docker image'
+            }
+        }
     }
 }
