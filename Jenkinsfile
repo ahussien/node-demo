@@ -20,7 +20,7 @@ pipeline {
         }
          stage('deploy') {
             steps {
-                echo 'deploy docker image'
+                echo 'deploy docker image 2'
             }
         }
     }
