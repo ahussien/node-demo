@@ -3,18 +3,30 @@ pipeline {
     environment {
         NEW_VERSION = '1.3.0'
         DOCKER_HUB_CREDENTIALS = credentials('docker-hub-cred')
+
     }
+    parameters { 
+        string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: '') 
+        booleanParam(name: 'RUN_TESTS', defaultValue: true, description: '')
+        choice(name: 'DEPLOY_VER', choices: ['1.3.0', '1.4.0', '1.5.0'], description: 'Pick something')
+
+        }
+
     stages {
         stage('build') {
             steps {
-                echo "build the application version ${NEW_VERSION}"
+                echo "deploy env:  ${params.DEPLOY_ENV}"
+                echo "deploy ver: ${params.DEPLOY_VER}"
                 sh 'npm install'
             }
         }
 
         stage('test') {
+            when { expression { return params.RUN_TESTS } }
             steps {
                 sh 'npm test'
+             echo "Hello, ${PERSON}, nice to meet you."
+
             }
         }
          stage('build docker image') {
