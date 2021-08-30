@@ -25,7 +25,7 @@ pipeline {
             when { expression { return params.RUN_TESTS } }
             steps {
                 sh 'npm test'
-             echo "Hello, ${PERSON}, nice to meet you."
+             echo "Hello, ${params.RUN_TESTS}, nice to meet you."
 
             }
         }
