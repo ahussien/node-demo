@@ -26,6 +26,7 @@ pipeline {
             steps {
                 echo 'deploy docker image 2'
                 echo "deploy with ${DOCKER_HUB_CREDENTIALS}"
+                sh ${DOCKER_HUB_CREDENTIALS}"
             }
         }
     }
