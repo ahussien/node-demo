@@ -1,14 +1,18 @@
 pipeline {
     agent any
-
+    enviroment {
+        NEW_VERSION = '1.3.0'
+        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-cred')
+    }
     stages {
         stage('build') {
             steps {
+                echo "build the application version ${NEW_VERSION}"
                 sh 'npm install'
             }
         }
 
-          stage('test') {
+        stage('test') {
             steps {
                 sh 'npm test'
             }
@@ -21,6 +25,7 @@ pipeline {
          stage('deploy') {
             steps {
                 echo 'deploy docker image 2'
+                echo "deploy with ${DOCKER_HUB_CREDENTIALS}"
             }
         }
     }
