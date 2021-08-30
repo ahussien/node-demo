@@ -25,8 +25,10 @@ pipeline {
          stage('deploy') {
             steps {
                 echo 'deploy docker image 2'
-                echo "deploy with ${DOCKER_HUB_CREDENTIALS}"
-                sh ${DOCKER_HUB_CREDENTIALS}"
+               withCredentials([usernamePassword(credentialsId: 'docker-hub-cred', passwordVariable: 'pass', usernameVariable: 'user')]) {
+            // the code here can access $pass and $user
+}                echo "deploy with ${pass}"
+                 echo "deploy with ${user}"
             }
         }
     }
