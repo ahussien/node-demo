@@ -7,13 +7,13 @@ def runTests() {
 }
 
 def buildDockerImage() {
-   sh 'docker build . -t ahussien/my-app:3.0'
+   sh 'docker build . -t ahussien/my-app:3.1'
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-cred', passwordVariable: 'pass', usernameVariable: 'user')]) {
                 sh "docker login -u $USER -p $PASS"
-                sh 'docker push ahussien/my-app:3.0'
+                sh 'docker push ahussien/my-app:3.1'
             }
 }
 
 def deployApp() {
-  echo 'deploy the application...'
+  echo 'deploy the application'
 }
