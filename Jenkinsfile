@@ -1,27 +1,29 @@
 pipeline {
     agent any
     stages {
+          stage('init') {
+            script {
+                gv = load "script.groovy"
+            }
+        }
         stage('build') {
-            steps {
-                sh 'npm install'
+            script {
+               gv.buildApp()
             }
         }
         stage('test') {
-            steps {
-                sh 'npm test'
+            script {
+               gv.runTests()
             }
         }
          stage('build docker image') {
-            steps {
-                sh 'docker build . -t ahussien/my-app:3.0'
-                withCredentials([usernamePassword(credentialsId: 'docker-hub-cred', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                sh "docker login -u $USER -p $PASS"
-                sh 'docker push ahussien/my-app:3.0'
+            script {
+                gv.buildDockerImage()
             }
         }}
          stage('deploy') {
-            steps {
-                echo 'deploy docker image 2'               
+            script {
+                gv.deployApp()             
             }
         }
     }
