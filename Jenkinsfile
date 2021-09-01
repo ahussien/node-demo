@@ -20,7 +20,7 @@ pipeline {
             script {
                 gv.buildDockerImage()
             }
-        }}
+        }
          stage('deploy') {
             script {
                 gv.deployApp()             
