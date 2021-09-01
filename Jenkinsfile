@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        NEW_VERSION = '1.3.0'    }
-
     stages {
         stage('build') {
             steps {
@@ -21,7 +18,7 @@ pipeline {
                 sh 'docker login -u $PASS -p $USER'
                 sh 'docker push ahussien/my-app:3.0'
             }
-        }
+        }}
          stage('deploy') {
             steps {
                 echo 'deploy docker image 2'               
